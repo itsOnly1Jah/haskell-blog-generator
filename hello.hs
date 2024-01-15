@@ -12,10 +12,10 @@ body_ :: String -> String
 body_ = el "body"
 
 head_ :: String -> String
-head_ content = "<head>" <> content <> "</head>"
+head_ = el "head"
 
 title_ :: String -> String
-title_ content = "<title>" <> content <> "</title>"
+title_ = el "title"
 
 el :: String -> String -> String
 el tag content =
