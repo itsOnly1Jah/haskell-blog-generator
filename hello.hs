@@ -1,32 +1,60 @@
-main = putStrLn myhtml
+main = putStrLn (render_ myhtml)
 
-myhtml = makehtml "My page title" (h1_ "My page heading" <> p_ "My page paragraph")
- 
-makehtml :: String -> String -> String
-makehtml title content = html_ (head_ (title_ title) <> body_ content)
+myhtml :: Html
+myhtml =
+  html_
+    "My page title"
+    ( append_
+        (h1_ "My page heading")
+        ( append_
+            (p_ "My page paragraph")
+            (p_ "My Second Paragraph")
+        )
+    )
 
-html_ :: String -> String
-html_ = el "html"
+newtype Html = Html String
+newtype Structure = Structure String
+type Title = String
 
-body_ :: String -> String
-body_ = el "body"
+html_ :: Title -> Structure -> Html
+html_ title content =
+  Html
+    ( el
+        "html"
+        ( el "head" (el "title" title)
+            <> el "body" (getStructureString content)
+        )
+    )
 
-head_ :: String -> String
-head_ = el "head"
+body_ :: String -> Structure
+body_ = Structure . el "body"
 
-title_ :: String -> String
-title_ = el "title"
+head_ :: String -> Structure
+head_ = Structure . el "head"
 
-p_ :: String -> String
-p_ = el "p"
+title_ :: String -> Structure
+title_ = Structure . el "title"
 
-h1_ :: String -> String
-h1_ = el "h1"
+p_ :: String -> Structure
+p_ = Structure . el "p"
+
+h1_ :: String -> Structure
+h1_ = Structure . el "h1"
 
 el :: String -> String -> String
 el tag content =
   "<" <> tag <> ">" <> content <> "</" <> tag <> ">"
 
-newtype Html = Html String
-newtype Structure = Structure String
+getStructureString :: Structure -> String
+getStructureString content =
+  case content of
+    Structure str -> str
+
+append_ :: Structure -> Structure -> Structure
+append_ (Structure s1) (Structure s2) = Structure (s1 <> s2)
+
+render_ :: Html -> String
+render_ html =
+  case html of
+    Html str -> str
 
