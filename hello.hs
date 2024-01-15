@@ -27,15 +27,6 @@ html_ title content =
         )
     )
 
-body_ :: String -> Structure
-body_ = Structure . el "body"
-
-head_ :: String -> Structure
-head_ = Structure . el "head"
-
-title_ :: String -> Structure
-title_ = Structure . el "title"
-
 p_ :: String -> Structure
 p_ = Structure . el "p"
 
