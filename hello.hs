@@ -11,6 +11,7 @@ html_ = el "html"
 body_ :: String -> String
 body_ = el "body"
 
+head_ :: String -> String
 head_ content = "<head>" <> content <> "</head>"
 
 title_ :: String -> String
