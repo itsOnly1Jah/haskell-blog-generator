@@ -1,6 +1,6 @@
 main = putStrLn myhtml
 
-myhtml = makehtml "My page title" "My page content"
+myhtml = makehtml "My page title" (h1_ "My page heading" <> p_ "My page paragraph")
  
 makehtml :: String -> String -> String
 makehtml title content = html_ (head_ (title_ title) <> body_ content)
