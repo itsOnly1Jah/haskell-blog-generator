@@ -47,9 +47,7 @@ el tag content =
   "<" <> tag <> ">" <> content <> "</" <> tag <> ">"
 
 getStructureString :: Structure -> String
-getStructureString content =
-  case content of
-    Structure str -> str
+getStructureString (Structure str) = str
 
 append_ :: Structure -> Structure -> Structure
 append_ (Structure s1) (Structure s2) = Structure (s1 <> s2)
