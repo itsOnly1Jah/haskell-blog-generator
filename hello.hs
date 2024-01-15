@@ -1,5 +1,5 @@
 main :: IO ()
-main = putStrLn (render_ myhtml)
+main = putStrLn (render myhtml)
 
 myhtml :: Html
 myhtml =
@@ -43,8 +43,8 @@ getStructureString (Structure str) = str
 append_ :: Structure -> Structure -> Structure
 append_ (Structure s1) (Structure s2) = Structure (s1 <> s2)
 
-render_ :: Html -> String
-render_ html =
+render :: Html -> String
+render html =
   case html of
     Html str -> str
 
